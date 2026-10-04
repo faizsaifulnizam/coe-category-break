@@ -18,7 +18,7 @@ class Figures(unittest.TestCase):
             ax=fig.axes[0]
             if ax.get_ylabel()=='B−A gap (S$ thousands)':
                 self.assertIn('year before May 2022',title.get_text())
-                self.assertIn('2026 median gap is about S$2,750',title.get_text())
+                self.assertIn('2026 Jan–Sep median gap is S$2,750',title.get_text())
                 dark=fig.get_facecolor()[0]<.5
                 self.assertEqual([p.get_alpha() for p in ax.patches],[.34 if dark else .16]*2)
                 seen.append(dark)

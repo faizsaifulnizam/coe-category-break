@@ -22,7 +22,7 @@ UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128.0.
 
 
 def validate(data):
-    rows = list(csv.reader(io.StringIO(data.decode('utf-8-sig'))))
+    rows = list(csv.reader(io.StringIO(data.decode('utf-8-sig')), strict=True))
     if not rows or rows[0] != HEADER:
         raise ValueError('invalid download schema')
     keys = Counter()
@@ -36,6 +36,8 @@ def validate(data):
         if any(not re.fullmatch(r'(\d+|\d{1,3}(,\d{3})+)', x) for x in r[3:]):
             raise ValueError('invalid integer cell')
         vals = [int(x.replace(',','')) for x in r[3:]]
+        if any(v > 2**63 - 1 for v in vals):
+            raise ValueError('integer cell exceeds SQL BIGINT range')
         if (month,rnd) in PAUSE:
             if any(vals):
                 raise ValueError('suspended exercise contains nonzero observations')
@@ -106,7 +108,10 @@ def main():
               'source':'LTA via data.gov.sg public v1 initiate/poll signed download',
               'files':{FILE:info}}
     # Import here to keep the validator usable independently.
-    from common import publish
+    if __package__:
+        from .common import publish
+    else:
+        from common import publish
     publish({path:data, RAW/'pull_manifest.json':(json.dumps(manifest,indent=2)+'\n').encode()})
     print('downloaded and validated:',info)
 
