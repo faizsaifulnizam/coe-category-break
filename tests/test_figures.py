@@ -4,6 +4,9 @@ import hashlib
 import subprocess
 import sys
 import unittest
+import tempfile
+from unittest.mock import patch
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 ROOT=Path(__file__).resolve().parents[1]
 
 class Figures(unittest.TestCase):
@@ -15,5 +18,30 @@ class Figures(unittest.TestCase):
         subprocess.run([sys.executable,str(ROOT/'src/figures.py')],check=True,cwd=ROOT)
         self.assertEqual(first,{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths})
         self.assertTrue(all(p.stat().st_size>(10000 if p.suffix=='.png' else 500) for p in paths))
+        for path in paths:
+            self.assertEqual(path.read_bytes(),(ROOT/'docs/img'/path.name).read_bytes())
+
+    def test_late_pages_replace_rolls_back_entire_figure_batch(self):
+        from src import figures,common
+        with tempfile.TemporaryDirectory() as td:
+            def fail_late(files):
+                mapped={Path(td)/p.relative_to(ROOT):data for p,data in files.items()}
+                self.assertEqual(len(mapped),12)
+                target=list(mapped)[-1]
+                self.assertTrue(target.is_relative_to(Path(td)/'docs/img'))
+                before={p:('old '+str(p.relative_to(td))).encode() for p in mapped}
+                for p,data in before.items():
+                    p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+                original=Path.replace
+                def fail(source,dest):
+                    if source.name.startswith('.stage-') and Path(dest)==target:
+                        raise OSError('injected final Pages replacement failure')
+                    return original(source,dest)
+                with patch.object(Path,'replace',fail):
+                    with self.assertRaisesRegex(OSError,'injected final Pages'):
+                        common.publish(mapped)
+                self.assertEqual(before,{p:p.read_bytes() for p in before})
+                self.assertFalse(any(p.name.startswith(('.stage-','.rollback-')) for p in Path(td).rglob('*')))
+            with patch.object(figures,'publish',fail_late):figures.main()
 
 if __name__=='__main__':unittest.main()

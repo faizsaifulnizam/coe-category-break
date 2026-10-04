@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>coe-category-break — A window-dependent COE premium gap</title>
+<meta name="description" content="Both COE premium levels rose. The median B−A gap increased S$12,008 in a long structural window, but S$2,336 in a fixed ±12-month window. Descriptive, not causal.">
+<link rel="canonical" href="https://faizsaifulnizam.github.io/coe-category-break/">
+<meta property="og:title" content="coe-category-break — The gap depends on the window">
+<meta property="og:description" content="Structural median B−A: S$6,190.50 → S$18,198.50 (98/106 exercises). Tight: S$21,745.50 → S$24,081.50 (24/24). Changed baskets; not a policy-effect estimate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://faizsaifulnizam.github.io/coe-category-break/">
+<meta property="og:image" content="https://faizsaifulnizam.github.io/coe-category-break/img/social-card.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="COE category break: structural gap change +S$12,008; tight-window change +S$2,336. Descriptive, not causal.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://faizsaifulnizam.github.io/coe-category-break/img/social-card.png">
+<style>
+:root{--bg:#FBFBF9;--fg:#14293D;--muted:#5C6B79;--accent:#22607B;--repo:#B9975B;--rule:#E7E3DC;--fig-bg:#FBFBF9}
+@media (prefers-color-scheme: dark){:root{--bg:#101E2B;--fg:#EAE6DF;--muted:#9AA9B6;--accent:#D4B87A;--rule:#2A3B4A;--fig-bg:#0C1824}}
+@font-face{font-family:'Inter';src:url('fonts/Inter-Regular.ttf');font-weight:400}
+@font-face{font-family:'Inter';src:url('fonts/Inter-SemiBold.ttf');font-weight:600}
+@font-face{font-family:'Source Serif 4';src:url('fonts/SourceSerif4-Regular.ttf');font-weight:400}
+@font-face{font-family:'Source Serif 4';src:url('fonts/SourceSerif4-Bold.ttf');font-weight:700}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.6;font-size:16.5px}
+.wrap{max-width:880px;margin:0 auto;padding:36px 22px 56px}
+.series{color:var(--muted);font-size:14.5px;letter-spacing:.02em;margin:0 0 14px;padding-bottom:10px;border-bottom:3px solid var(--repo)}
+.banner img,.fig img{width:100%;height:auto;display:block;border:1px solid var(--rule);border-radius:10px}
+.lead{font-family:'Source Serif 4',Georgia,serif;font-size:22px;line-height:1.5;margin:34px 0 8px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0}
+.stat{border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.stat .n{font-family:'Source Serif 4',Georgia,serif;font-size:29px;line-height:1.15}
+.stat .l{color:var(--muted);font-size:14px;margin-top:6px}
+h1,h2{font-family:'Source Serif 4',Georgia,serif;font-weight:700}h1{font-size:32px;margin:30px 0 0}h2{font-size:26px;margin:52px 0 12px}
+p{margin:12px 0}a{color:var(--accent)}.fig{margin:26px 0}.fig figcaption,.cap{color:var(--muted);font-size:14px;margin-top:8px}
+.note{border:1px solid var(--rule);border-radius:10px;padding:14px 16px;font-size:14.5px;color:var(--muted)}
+ol.method{margin:14px 0;padding-left:22px}ol.method li{margin:10px 0}
+pre{background:transparent;border:1px solid var(--rule);border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:13px;line-height:1.55}
+code{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:.92em}footer{border-top:1px solid var(--rule);margin-top:60px;padding-top:18px;color:var(--muted);font-size:13.5px}
+@media (max-width:760px){.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<p class="series">LTA COE bidding results via data.gov.sg · fixed snapshot through 2026-09 R2 · 5 of 6</p>
+<div class="banner"><picture>
+<source media="(prefers-color-scheme: dark)" srcset="img/banner-dark.svg">
+<img src="img/banner.svg" alt="Did the B–A premium gap move after May 2022? A descriptive before/after read, not a causal estimate.">
+</picture></div>
+<h1>The gap answer depends on the window</h1>
+<p class="lead"><b>Both premium levels rose.</b> The median exercise-level B−A gap rose from <b>S$6,190.50 to S$18,198.50</b> in the structural comparison (<b>+S$12,008</b>). In the fixed ±12-month comparison it rose from <b>S$21,745.50 to S$24,081.50</b> (<b>+S$2,336</b>): the gap was already large before May 2022.</p>
+<p class="note"><b>Not the effect of the rule change.</b> Redefining A/B changed the baskets being compared. These are different observational samples, with no fixed-composition or untreated control. The small tight-window change does not establish that the rule had no effect.</p>
+<div class="stats">
+<div class="stat"><div class="n">+S$12,008</div><div class="l">Structural median B−A change: 6,190.50 → 18,198.50. Pre 2018-01–2022-04: n=98; post 2022-05–2026-09 R2: n=106 exercises.</div></div>
+<div class="stat"><div class="n">+S$2,336</div><div class="l">Tight median B−A change: 21,745.50 → 24,081.50. Pre 2021-05–2022-04 vs post 2022-05–2023-04: n=24 / 24 exercises.</div></div>
+<div class="stat"><div class="n">Both levels rose</div><div class="l">Structural median A +59,484, B +75,046.50; tight A +32,791, B +29,378 (S$). Category-median changes do not decompose the median paired gap.</div></div>
+<div class="stat"><div class="n">204 paired exercises</div><div class="l">408 A/B rows retained from 2018 onward; 1,980 official rows across five categories. Six suspended Apr–Jun 2020 auctions are absent, not zero-price observations.</div></div>
+</div>
+<figure class="fig"><picture>
+<source media="(prefers-color-scheme: dark)" srcset="img/f1_levels-dark.png">
+<img src="img/f1_levels.png" alt="Category A and B premiums rose; the May 2022 eligibility boundary is marked, not interpreted as causal.">
+</picture><figcaption>Levels and the gap answer different questions. Premium means auction quota premium, not renewal PQP or vehicle transaction price. R1/R2 are spaced at month-start/+14 days for display, not actual closing dates.</figcaption></figure>
+<h2>The gap was already large before May 2022</h2>
+<figure class="fig"><picture>
+<source media="(prefers-color-scheme: dark)" srcset="img/f2_gap-dark.png">
+<img src="img/f2_gap.png" alt="B−A gaps with full three-exercise medians; the fixed tight comparison windows are shaded.">
+</picture><figcaption>Shading marks the tight comparison windows, not confidence intervals or treatment effects. The structural read uses the whole 2018-onward chart on either side. Observed ranges overlap substantially; post gaps are not uniformly above pre gaps.</figcaption></figure>
+<h2>Method — separate levels from paired differences</h2>
+<ol class="method">
+<li><b>Acquire and verify</b> — independently downloaded LTA <a href="https://data.gov.sg/datasets/d_69b3380ad7e51aff3a7dcc84eba52b8a/view">COE bidding results</a>, pulled 2026-10-04. The vendored raw CSV has a byte-SHA-256 manifest. <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/src/download.py">Download code</a> validates before replacing raw/manifest.</li>
+<li><b>Stage and check</b> — parse comma-formatted integers; reject duplicates, incomplete categories, missing A/B and missing scheduled auctions. Latest complete R1 can be a complete exercise without being a complete month. <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/sql/05_checks.sql">SQL checks</a>.</li>
+<li><b>Pair and compare</b> — one observation per exercise, unweighted: gap = B − A. Report the median of paired differences, not the difference of category medians. Structural windows are unequal-duration market-cycle context; tight windows are fixed calendar ±12 months, not detrended or anticipation-free. <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/sql/02_metrics.sql">Metrics SQL</a>.</li>
+<li><b>Stress-test</b> — R1-only and excluding the last two pre / first two post all-round exercises. Independent stdlib calculations reproduce 12 summary rows. <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/tests/test_analysis.py">Independent tests</a>.</li>
+<li><b>Draw and validate</b> — full trailing three-exercise medians, null at the left edge and first two exercises after suspension. No smoothing across the pause. <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/src/figures.py">Figure producer</a> publishes light/dark assets and site copies in the existing staged batch with ordinary-exception rollback, not crash/power-loss or whole-pipeline atomicity.</li>
+</ol>
+<h2>Sensitivity — sign survives, magnitude changes</h2>
+<p>R1-only median-gap changes are <b>+S$12,398 / +S$2,792.50</b> (structural/tight). Excluding Apr-2022 R1/R2 and May-2022 R1/R2 gives <b>+S$11,892.50 / +S$2,832.50</b>. Selection uses all-round order before any R1 filter. This is consistency under the specified reads, not universal robustness or a causal estimate. <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/outputs/sensitivity.csv">Sensitivity CSV</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/sensitivity.md">how to read it</a>.</p>
+<h2>What this file cannot say</h2>
+<p><a href="https://onemotoring.lta.gov.sg/content/dam/onemotoring/pdf/Circulars%20to%20ESAs/2022/VRL_04_2022.pdf">LTA circular VRL/04/2022, pp 1, 4–5</a> raises fully electric Cat A maximum power from 97 to 110kW inclusive at the first May 2022 exercise (4–6 May), not the March announcement. Non-fully-electric A retains ≤1,600cc AND ≤97kW. This changes composition in a shared scarce-permit market; B is not an untreated control.</p>
+<p>B−A cancels only exactly shared additive changes, not category-specific quota, demand or mix shifts. Quota/supply cycles, dealer orders, EV incentives/adoption, model availability, macro conditions and anticipation can confound the comparison. Reclassification may mechanically move measured gaps without a behavioral response. Range overlap cannot prove zero effect. Aggregate clearing prices lack individual bids, power bands, registrations and buyer substitution.</p>
+<p>No causal estimates, difference-in-differences, significance stars, prescriptions or forecasts. The <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/if_i_ran_the_test.md">experiment-design annex</a> discusses counterfactuals and shared-market interference; it is not an implemented experiment with this dataset.</p>
+<h2>Reproduce</h2>
+<p>The repository README carries the full rules, validation and limits. Git Bash / Bash, Windows or Linux:</p>
+<pre><code>git clone https://github.com/faizsaifulnizam/coe-category-break &amp;&amp; cd coe-category-break
+uv venv .venv --python 3.12 --seed
+if [ -f .venv/Scripts/activate ]; then source .venv/Scripts/activate; else source .venv/bin/activate; fi
+python -m pip install --require-hashes -r requirements.lock
+python src/download.py
+python src/build_dataset.py
+python src/analysis.py
+python src/figures.py
+python -m unittest discover -s tests -v
+python tests/smoke_test.py</code></pre>
+<p class="cap">Default download validates the committed snapshot without data-fetch network. Installing dependencies needs network/cache. A later <code>--force</code> pull requires rerunning all stages and reviewing maintained prose, chart titles and snapshot locks. Spot-check all-round gap medians: structural 6,190.50 → 18,198.50; tight 21,745.50 → 24,081.50; <code>git diff --exit-code -- 'outputs/*.csv'</code>.</p>
+<h2>Read more</h2>
+<ul>
+<li><a href="https://github.com/faizsaifulnizam/coe-category-break">Repository and inline method</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/tree/main/outputs">numerical outputs</a></li>
+<li><a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/decision_memo.md">Decision memo</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/data_audit.md">data audit</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/verification.md">verification receipts and clean-history context</a></li>
+<li><a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/if_i_ran_the_test.md">If I ran the test — experiment-design annex</a></li>
+</ul>
+<footer>
+<p>Independent, unofficial analysis by <a href="https://github.com/faizsaifulnizam">Muhammad Faiz Saifulnizam</a>. Data: LTA via data.gov.sg, Singapore Open Data Licence. Code: MIT. Hermes-assisted implementation; Faiz chose the question and approved publication. Not LTA-endorsed; descriptive, not causal.</p>
+<p>Singapore public-data series: <a href="https://github.com/faizsaifulnizam/hdb-resale-mart">hdb-resale-mart</a> · <a href="https://github.com/faizsaifulnizam/card-book-quality">card-book-quality</a> · <a href="https://github.com/faizsaifulnizam/coe-quota-premium">coe-quota-premium</a> · <a href="https://github.com/faizsaifulnizam/retail-sales-split">retail-sales-split</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break">coe-category-break</a> · <a href="https://github.com/faizsaifulnizam/hdb-lease-slope">hdb-lease-slope</a>.</p>
+</footer>
+</main>
+</body>
+</html>

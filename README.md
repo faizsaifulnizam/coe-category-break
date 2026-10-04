@@ -1,6 +1,11 @@
 **This is not a causal estimate: redefining Category A/B changed the baskets being compared.**
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg"><img src="assets/banner.svg" width="100%" alt="COE category break: did the B–A premium gap move after May 2022? Descriptive, not causal."></picture>
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
+<img src="assets/banner.svg" width="100%" alt="COE category break: did the B–A premium gap move after May 2022? Descriptive, not causal.">
+</picture>
+
+[Full-size banner](assets/banner.svg) · [dark](assets/banner-dark.svg)
 
 # coe-category-break
 
@@ -10,7 +15,7 @@
 
 > **Both premium levels rose, but the gap answer depends on the window.** The median exercise-level **B−A gap rose from S$6,190.50 to S$18,198.50** in the structural comparison (**+S$12,008**). In the fixed ±12-month comparison it rose only **S$2,336**, from **S$21,745.50 to S$24,081.50**: the gap was already large before May 2022. These describe different samples, **not the effect of the rule change**, and do not establish that the rule had no effect.
 
-**Status:** built 2026-10-04; private PRE-GATE, awaiting Faiz's review. Fixed official snapshot through **2026-09 R2**, independently pulled 2026-10-04. Findings/chart titles are reviewed prose, not automatically refreshed text. Part of a six-repo series on Singapore public data.
+**Status:** built and reviewed 2026-10-04; publication approved. Fixed official snapshot through **2026-09 R2**, independently pulled 2026-10-04. Findings/chart titles are reviewed prose, not automatically refreshed text. Part of a six-repo series on Singapore public data. [Report site](https://faizsaifulnizam.github.io/coe-category-break/) · [verification receipts](docs/verification.md). Prior private reviews are archived outside this repository's clean public history.
 
 ## Key numbers (all reproducible)
 
@@ -27,13 +32,19 @@ One observation = one fully paired exercise; money is **S$**, not vehicle prices
 - **Ranges overlap substantially:** post gaps were not uniformly above pre gaps. The long comparison cannot isolate a discontinuity at the event; the tight comparison does not establish its absence.
 - **Robust reads preserve the sign, not magnitude:** R1-only gap-median changes **+12,398 / +2,792.50** (structural/tight); excluding two exercises each side **+11,892.50 / +2,832.50**. [Sensitivity CSV](outputs/sensitivity.csv) / [how to read it](docs/sensitivity.md).
 
-<a href="reports/figures/f1_levels.png"><picture><source media="(prefers-color-scheme: dark)" srcset="reports/figures/f1_levels-dark.png"><img src="reports/figures/f1_levels.png" width="100%" alt="Category A and B premiums rose; the May 2022 EV eligibility boundary is marked, not interpreted as causal."></picture></a>
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="reports/figures/f1_levels-dark.png">
+<img src="reports/figures/f1_levels.png" width="100%" alt="Category A and B premiums rose; the May 2022 EV eligibility boundary is marked, not interpreted as causal.">
+</picture>
 
 [Full-size levels](reports/figures/f1_levels.png) · [dark](reports/figures/f1_levels-dark.png)
 
 ### More views
 
-<a href="reports/figures/f2_gap.png"><picture><source media="(prefers-color-scheme: dark)" srcset="reports/figures/f2_gap-dark.png"><img src="reports/figures/f2_gap.png" width="100%" alt="B−A gaps with full three-exercise medians; tight windows shaded. The gap was already large before May 2022."></picture></a>
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="reports/figures/f2_gap-dark.png">
+<img src="reports/figures/f2_gap.png" width="100%" alt="B−A gaps with full three-exercise medians; tight windows shaded. The gap was already large before May 2022.">
+</picture>
 
 [Full-size gap](reports/figures/f2_gap.png) · [dark](reports/figures/f2_gap-dark.png) · [exercise table](outputs/exercise_series.csv). Shading marks comparison windows, **not confidence intervals or treatment effects**. Structural comparison = whole 2018-onward chart on either side.
 
@@ -56,7 +67,7 @@ After the May 2022 eligibility change, did the A/B premium difference move, or o
 2. **Stage/check** — [01_staging.sql](sql/01_staging.sql) uses `TRY_CAST` for comma-formatted integers; [05_checks.sql](sql/05_checks.sql) checks nonnull values, unique keys, five-category coverage, positive premiums/quotas and A/B pairing before [build_dataset.py](src/build_dataset.py) publishes parquet.
 3. **Measure** — [02_metrics.sql](sql/02_metrics.sql) pairs A/B, computes `gap = premium_B − premium_A`, windows and full rolling medians. [analysis.py](src/analysis.py) exports three CSVs from checked raw-backed SQL tables. Parquet is an inspectable staging artifact.
 4. **Stress-test** — both declared windows, R1-only and excluding two all-round exercises each side. [Independent raw-CSV calculations](tests/test_analysis.py) reproduce every summary median, minimum, maximum and count using stdlib `statistics`, not DuckDB.
-5. **Communicate** — [figures.py](src/figures.py) generates both themes and banners after pixel QA. [Memo](docs/decision_memo.md) / [experiment annex](docs/if_i_ran_the_test.md).
+5. **Communicate** — [figures.py](src/figures.py) generates both themes and banners after pixel QA, including identical Pages copies in the same validated batch. [Memo](docs/decision_memo.md) / [experiment annex](docs/if_i_ran_the_test.md).
 
 ### Rules chosen, and why
 
@@ -88,7 +99,7 @@ Windows/filters were declared before numerical interpretation in the build sheet
 
 ### Principles this repo follows
 
-One locked question; declared windows; SQL first; preserve bytes; independent checks; limits beside findings. **Hermes-assisted portfolio work:** Hermes implemented pipeline/presentation; Faiz chose the question and approves interpretation at the gate. No unaided-coding claim.
+One locked question; declared windows; SQL first; preserve bytes; independent checks; limits beside findings. **Hermes-assisted portfolio work:** Hermes implemented pipeline/presentation; Faiz chose the question and approved publication after review. No unaided-coding claim.
 
 ## Reproduce
 
@@ -102,7 +113,7 @@ python -m pip install --require-hashes -r requirements.lock
 python src/download.py       # validate vendored snapshot, no live data-fetch network
 python src/build_dataset.py  # staging + SQL checks → inspectable parquet
 python src/analysis.py       # three committed CSVs
-python src/figures.py        # four PNGs + two SVGs, validated batch
+python src/figures.py        # four PNGs + two SVGs + Pages copies, validated batch
 python -m unittest discover -s tests -v
 python tests/smoke_test.py
 ```
@@ -115,7 +126,7 @@ Quota/supply cycles, dealer orders/bidding strategy, model availability, EV ince
 
 ## Out of scope
 
-Causal estimates, difference-in-differences, significance stars, policy prescriptions, forecasts, price prediction. Pages/releases/social/profile packaging deferred until Faiz's gate. The annex is a feasibility-limited design discussion, not an experiment implemented with this dataset.
+Causal estimates, difference-in-differences, significance stars, policy prescriptions, forecasts, price prediction. The annex is a feasibility-limited design discussion, not an experiment implemented with this dataset.
 
 ## Licence
 
@@ -123,6 +134,6 @@ Code: [MIT](LICENSE). Data: © Land Transport Authority via data.gov.sg, [Singap
 
 ---
 
-*Singapore public-data series: [hdb-resale-mart](https://github.com/faizsaifulnizam/hdb-resale-mart) · [card-book-quality](https://github.com/faizsaifulnizam/card-book-quality) · [coe-quota-premium](https://github.com/faizsaifulnizam/coe-quota-premium) · [retail-sales-split](https://github.com/faizsaifulnizam/retail-sales-split) · hdb-lease-slope (pending gate).*
+*Singapore public-data series: [hdb-resale-mart](https://github.com/faizsaifulnizam/hdb-resale-mart) · [card-book-quality](https://github.com/faizsaifulnizam/card-book-quality) · [coe-quota-premium](https://github.com/faizsaifulnizam/coe-quota-premium) · [retail-sales-split](https://github.com/faizsaifulnizam/retail-sales-split) · [coe-category-break](https://github.com/faizsaifulnizam/coe-category-break) · [hdb-lease-slope](https://github.com/faizsaifulnizam/hdb-lease-slope).*
 
 *If you found this useful, a star helps others find it.*
