@@ -116,7 +116,10 @@ def main():
             suffix='-dark' if dark else ''
             files[ROOT/f"reports/figures/f{2 if gap else 1}_{'gap' if gap else 'levels'}{suffix}.png"]=out.getvalue()
         files[ROOT/f"assets/banner{'-dark' if dark else ''}.svg"]=banner(dark)
+    # Keep Pages copies in the same validated batch, including ordinary-exception rollback.
+    for path,data in list(files.items()):
+        files[ROOT/'docs/img'/path.name]=data
     publish(files)
-    print('published four figures + two banners; QA passed before writes')
+    print('published four figures + two banners and matching Pages copies; QA passed before writes')
 
 if __name__=='__main__':main()

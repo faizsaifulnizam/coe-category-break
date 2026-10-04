@@ -13,7 +13,8 @@ class Publication(unittest.TestCase):
     def test_validated_batch_replaces_both_files(self):
         self.assertTrue(callable(getattr(common,'publish',None)),'batch publication missing')
         with tempfile.TemporaryDirectory() as td:
-            a,b=Path(td)/'a',Path(td)/'b'
+            a,b=Path(td)/'reports/figures/f1.png',Path(td)/'docs/img/f1.png'
+            a.parent.mkdir(parents=True)
             a.write_bytes(b'old')
             common.publish({a:b'new',b:b'two'})
             self.assertEqual(a.read_bytes(),b'new')
@@ -21,7 +22,8 @@ class Publication(unittest.TestCase):
 
     def test_ordinary_second_replace_failure_restores_first(self):
         with tempfile.TemporaryDirectory() as td:
-            a,b=Path(td)/'a',Path(td)/'b'
+            a,b=Path(td)/'reports/figures/f1.png',Path(td)/'docs/img/f1.png'
+            a.parent.mkdir(parents=True);b.parent.mkdir(parents=True)
             a.write_bytes(b'one');b.write_bytes(b'two')
             original=Path.replace
             def fail_second(source,target):
@@ -33,6 +35,6 @@ class Publication(unittest.TestCase):
                     common.publish({a:b'new one',b:b'new two'})
             self.assertEqual(a.read_bytes(),b'one')
             self.assertEqual(b.read_bytes(),b'two')
-            self.assertEqual(sorted(p.name for p in Path(td).iterdir()),['a','b'])
+            self.assertFalse(any(p.name.startswith(('.stage-','.rollback-')) for p in Path(td).rglob('*')))
 
 if __name__=='__main__':unittest.main()

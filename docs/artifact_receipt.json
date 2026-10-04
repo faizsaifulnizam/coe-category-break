@@ -1,5 +1,7 @@
 {
   "ref": "feat/category-break",
+  "receipt_kind": "historical_private_prepublication",
+  "history_note": "Prior private build clone; head/ref are archived outside current clean public history, not current-root execution.",
   "head": "b3a19b69ce787c81828d1d34b25039e720dade55",
   "clone": "C:\\Users\\Faiz\\AppData\\Local\\hermes\\cache\\scratch\\coe05-receipts\\branch-stranger-gitbash\\coe-category-break",
   "log": "C:\\Users\\Faiz\\AppData\\Local\\hermes\\cache\\scratch\\coe05-receipts\\branch-stranger-gitbash.log",

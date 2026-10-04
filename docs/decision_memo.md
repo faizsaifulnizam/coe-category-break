@@ -1,6 +1,6 @@
 # Decision memo — levels rose; a window-dependent gap
 
-**2026-10-04 · descriptive, not causal · private pre-gate**
+**2026-10-04 · descriptive, not causal · reviewed for publication**
 
 The long structural read shows a wider median B−A gap: **S$6,190.50 → S$18,198.50 (+12,008)**. It compares 2018-01–2022-04 (98 exercises) with 2022-05–2026-09 R2 (106). Median A rises **36,619 → 96,103** and B **40,005 → 115,051.50**. Gap ranges **−1,198–30,590** and **−2,009–50,335** overlap; the post series is not uniformly higher.
 
