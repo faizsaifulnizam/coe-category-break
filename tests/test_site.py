@@ -18,6 +18,37 @@ class Tags(HTMLParser):
     def handle_starttag(self,tag,attrs):self.tags.append((tag,dict(attrs)))
 
 class Site(unittest.TestCase):
+    def test_review_claims_match_raw_and_explain_opposite_sign(self):
+        from collections import defaultdict
+        from statistics import median
+        with (ROOT/'data/raw/coe-bidding-results.csv').open(encoding='utf-8',newline='') as f:
+            raw=list(csv.DictReader(f))
+        pairs=defaultdict(dict)
+        for r in raw:
+            if r['month']>='2018-01' and r['vehicle_class'] in ('Category A','Category B'):
+                pairs[(r['month'],r['bidding_no'])][r['vehicle_class']]=int(r['premium'].replace(',',''))
+        annual=defaultdict(list)
+        for (month,_),p in pairs.items():annual[month[:4]].append(p['Category B']-p['Category A'])
+        self.assertEqual((median(annual['2026']),len(annual['2026'])),(2750,18))
+        with (ROOT/'outputs/gap_summary.csv').open(encoding='utf-8',newline='') as f:
+            tight={r['period']:r for r in csv.DictReader(f) if r['window']=='tight' and r['variant']=='all'}
+        differences=[Decimal(tight[p]['median_b'])-Decimal(tight[p]['median_a']) for p in ('pre','post')]
+        self.assertEqual(differences[1]-differences[0],Decimal('-3413'))
+        for name in ('README.md','docs/index.html'):
+            text=(ROOT/name).read_text(encoding='utf-8')
+            self.assertIn('opposite sign',text)
+            self.assertIn('−3,413',text)
+            self.assertIn('2022 is not a post-only year',text)
+            for year,values in sorted(annual.items()):
+                self.assertIn(f'{year} {median(values):,.2f}'.removesuffix('.00'),text)
+            for cat in ('Category A','Category B'):
+                quotas=[sum(int(r['quota']) for r in raw if r['vehicle_class']==cat and start<=r['month']<=end) for start,end in (('2022-02','2022-04'),('2022-05','2022-07'))]
+                change=(quotas[1]/quotas[0]-1)*100
+                self.assertIn(f'{quotas[0]:,} → {quotas[1]:,} ({change:+.1f}%)'.replace('-','−'),text)
+            self.assertIn('Requires uv on PATH',text)
+            self.assertIn('decoded pixels',text)
+            self.assertNotIn('Private clone requires',text)
+
     def test_site_assets_metadata_claims_and_series(self):
         html=(ROOT/'docs/index.html').read_text(encoding='utf-8')
         card=(ROOT/'docs/social-card.html').read_text(encoding='utf-8')

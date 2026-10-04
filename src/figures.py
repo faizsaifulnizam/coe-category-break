@@ -91,12 +91,12 @@ def main():
         for gap in (False,True):
             fig,ax=plt.subplots(figsize=(8,4.5),dpi=200)
             fig.subplots_adjust(left=.105,right=.96,bottom=.23,top=.77)
-            title=fig.text(.04,.945,'The gap was already large before the rule change' if gap else 'Both categories rose; the gap followed its own path',fontsize=13,ha='left',va='top',fontfamily='Source Serif 4',color=ink)
-            subtitle=fig.text(.04,.84,f"2018–{rows[-1][0].year} · EV Cat A limit → 110kW: May 2022 R1 · descriptive, not causal",fontsize=9,color=muted)
+            title=fig.text(.04,.945,'Already wide in the year before May 2022;\n2026 median gap is about S$2,750' if gap else 'Both categories rose; the gap followed its own path',fontsize=13,ha='left',va='top',fontfamily='Source Serif 4',color=ink)
+            subtitle=fig.text(.04,.80 if gap else .84,f"2018–{rows[-1][0].year} · EV Cat A limit → 110kW: May 2022 R1 · descriptive, not causal",fontsize=9,color=muted)
             ax.axvline(date(2022,5,1),color=ink,ls=':',lw=1.2)
             if gap:
-                ax.axvspan(date(2021,5,1),date(2022,5,1),color=petrol,alpha=.16,label='tight pre (12 months)')
-                ax.axvspan(date(2022,5,1),date(2023,5,1),color=brass,alpha=.16,label='tight post (12 months)')
+                ax.axvspan(date(2021,5,1),date(2022,5,1),color=petrol,alpha=(.34 if dark else .16),hatch='///' if dark else None,label='tight pre (12 months)')
+                ax.axvspan(date(2022,5,1),date(2023,5,1),color=brass,alpha=(.34 if dark else .16),hatch='...' if dark else None,label='tight post (12 months)')
                 ax.plot(xs,series[2],color=muted,lw=.9,label='B−A per exercise')
                 ax.plot(xs,series[3],color=brass,lw=1.9,label='3-exercise median (full only)')
                 ax.axhline(0,color=ink,lw=.6)

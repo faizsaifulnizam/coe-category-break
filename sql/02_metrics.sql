@@ -10,7 +10,7 @@ WITH paired AS (
 ), gaps AS (
  SELECT *,premium_b-premium_a AS gap,
         CASE WHEN month < DATE '2022-05-01' THEN 'pre' ELSE 'post' END AS period,
-        slot BETWEEN 2022*24+8-1 AND 2022*24+8+2 AS transition
+        (month = DATE '2022-04-01' OR month = DATE '2022-05-01') AS transition
  FROM paired
 )
 SELECT *,CASE WHEN count(*) OVER w=3 AND slot-min(slot) OVER w=2

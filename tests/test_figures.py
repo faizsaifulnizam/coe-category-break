@@ -10,6 +10,25 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 ROOT=Path(__file__).resolve().parents[1]
 
 class Figures(unittest.TestCase):
+    def test_gap_title_and_theme_window_contrast(self):
+        from src import figures
+        original=figures.qa
+        seen=[]
+        def inspect(fig,title,footer,subtitle):
+            ax=fig.axes[0]
+            if ax.get_ylabel()=='B−A gap (S$ thousands)':
+                self.assertIn('year before May 2022',title.get_text())
+                self.assertIn('2026 median gap is about S$2,750',title.get_text())
+                dark=fig.get_facecolor()[0]<.5
+                self.assertEqual([p.get_alpha() for p in ax.patches],[.34 if dark else .16]*2)
+                seen.append(dark)
+            original(fig,title,footer,subtitle)
+        try:
+            with patch.object(figures,'qa',inspect):figures.main()
+            self.assertEqual(seen,[False,True])
+        finally:
+            figures.plt.close('all')
+
     def test_figures_cli_repeat_bytes(self):
         self.assertTrue((ROOT/'src/figures.py').exists(),'figure CLI missing')
         paths=[ROOT/f'reports/figures/{stem}{suffix}.png' for stem in ('f1_levels','f2_gap') for suffix in ('','-dark')]+[ROOT/f'assets/banner{suffix}.svg' for suffix in ('','-dark')]

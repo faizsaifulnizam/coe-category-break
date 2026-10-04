@@ -13,9 +13,9 @@
 
 [![CI](https://github.com/faizsaifulnizam/coe-category-break/actions/workflows/ci.yml/badge.svg)](https://github.com/faizsaifulnizam/coe-category-break/actions/workflows/ci.yml) [![MIT](https://img.shields.io/badge/license-MIT-B9975B.svg)](LICENSE) ![Python 3.12](https://img.shields.io/badge/Python-3.12-22607B.svg) ![DuckDB](https://img.shields.io/badge/SQL-DuckDB-C0552B.svg) [Data: LTA/data.gov.sg](https://data.gov.sg/datasets/d_69b3380ad7e51aff3a7dcc84eba52b8a/view)
 
-> **Both premium levels rose, but the gap answer depends on the window.** The median exercise-level **B−A gap rose from S$6,190.50 to S$18,198.50** in the structural comparison (**+S$12,008**). In the fixed ±12-month comparison it rose only **S$2,336**, from **S$21,745.50 to S$24,081.50**: the gap was already large before May 2022. These describe different samples, **not the effect of the rule change**, and do not establish that the rule had no effect.
+> **Both premium levels rose, but the gap answer depends on the window.** The median exercise-level **B−A gap rose from S$6,190.50 to S$18,198.50** in the structural comparison (**+S$12,008**). In the fixed ±12-month comparison it rose only **S$2,336**, from **S$21,745.50 to S$24,081.50**: the gap was already large in the year before May 2022. These describe different samples, **not the effect of the rule change**, and do not establish that the rule had no effect.
 
-**Status:** built and reviewed 2026-10-04; publication approved. Fixed official snapshot through **2026-09 R2**, independently pulled 2026-10-04. Findings/chart titles are reviewed prose, not automatically refreshed text. Part of a six-repo series on Singapore public data. [Report site](https://faizsaifulnizam.github.io/coe-category-break/) · [verification receipts](docs/verification.md). Prior private reviews are archived outside this repository's clean public history.
+**Status:** built and reviewed 2026-10-04; public. Grok-review corrections verified 2026-10-04. Fixed official snapshot through **2026-09 R2**, independently pulled 2026-10-04. Findings/chart titles are reviewed prose, not automatically refreshed text. Part of a six-repo series on Singapore public data. [Report site](https://faizsaifulnizam.github.io/coe-category-break/) · [verification receipts](docs/verification.md). Prior private reviews are archived outside this repository's clean public history.
 
 ## Key numbers (all reproducible)
 
@@ -28,8 +28,9 @@ One observation = one fully paired exercise; money is **S$**, not vehicle prices
 | Tight pre: 2021-05–2022-04 | 24 (12 / 12) | 53,209 | 78,650.50 | 21,745.50 | 8,211 → 30,590 |
 | Tight post: 2022-05–2023-04 | 24 (12 / 12) | 86,000 | 108,028.50 | 24,081.50 | 15,355 → 31,104 |
 
-- **Levels rose in both windows:** structural median A **+59,484**, B **+75,046.50**; tight A **+32,791**, B **+29,378**. Level-median changes do not algebraically decompose the median paired gap.
+- **Levels rose in both windows:** structural median A **+59,484**, B **+75,046.50**; tight A **+32,791**, B **+29,378**. Do not subtract the level columns to obtain the median paired gap. median(B)−median(A) moves structural 3,386 → 18,948.50 (+15,562.50) but tight 25,441.50 → 22,028.50 (−3,413), the opposite sign from the median paired-gap change (+12,008 structural; +2,336 tight). For the gap finding, quote the median of exercise-level B−A only.
 - **Ranges overlap substantially:** post gaps were not uniformly above pre gaps. The long comparison cannot isolate a discontinuity at the event; the tight comparison does not establish its absence.
+- Calendar-year median paired gaps (S$), not a permanent post level: 2018 1,991; 2019 8,863.50; 2020 2,852.50; 2021 11,799; 2022 25,890.50 (May split); 2023 23,796.50; 2024 11,900.50; 2025 18,492.50; 2026 2,750 (Jan–Sep R2, 18 exercises). 2022 is not a post-only year. The 2026 partial-year median is below the structural-pre median.
 - **Robust reads preserve the sign, not magnitude:** R1-only gap-median changes **+12,398 / +2,792.50** (structural/tight); excluding two exercises each side **+11,892.50 / +2,832.50**. [Sensitivity CSV](outputs/sensitivity.csv) / [how to read it](docs/sensitivity.md).
 
 <picture>
@@ -43,7 +44,7 @@ One observation = one fully paired exercise; money is **S$**, not vehicle prices
 
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="reports/figures/f2_gap-dark.png">
-<img src="reports/figures/f2_gap.png" width="100%" alt="B−A gaps with full three-exercise medians; tight windows shaded. The gap was already large before May 2022.">
+<img src="reports/figures/f2_gap.png" width="100%" alt="B−A gaps with full three-exercise medians; tight windows shaded. Already wide in the year before May 2022; 2026 Jan–Sep median gap is S$2,750.">
 </picture>
 
 [Full-size gap](reports/figures/f2_gap.png) · [dark](reports/figures/f2_gap-dark.png) · [exercise table](outputs/exercise_series.csv). Shading marks comparison windows, **not confidence intervals or treatment effects**. Structural comparison = whole 2018-onward chart on either side.
@@ -103,6 +104,8 @@ One locked question; declared windows; SQL first; preserve bytes; independent ch
 
 ## Reproduce
 
+Requires uv on PATH (https://docs.astral.sh/uv/) to create the Python 3.12 venv. If uv is absent, use `python3.12 -m venv .venv` (`py -3.12 -m venv .venv` on Windows), activate as below, then use the same pip line. CI uses actions/setup-python and does not run the uv line.
+
 ```bash
 git clone https://github.com/faizsaifulnizam/coe-category-break && cd coe-category-break
 uv venv .venv --python 3.12 --seed
@@ -118,9 +121,13 @@ python -m unittest discover -s tests -v
 python tests/smoke_test.py
 ```
 
-Spot-check `gap_summary.csv`, `variant=all`: structural **6,190.50 → 18,198.50**, tight **21,745.50 → 24,081.50**; then `git diff --exit-code -- 'outputs/*.csv'`. Private clone requires authorized access. A later `python src/download.py --force` creates a **new snapshot**: rerun and review maintained prose/chart titles and locks before publishing. Fixed tight-window dates do not slide with new history.
+Figure PNG bytes are not a cross-machine lock. A dirty `reports/figures` or `docs/img` after `figures.py` is compression/metadata-only only if the decoded pixels also match the committed PNGs. An empty CSV diff alone does not establish image equivalence; inspect any pixel differences.
+
+Spot-check `gap_summary.csv`, `variant=all`: structural **6,190.50 → 18,198.50**, tight **21,745.50 → 24,081.50**; then `git diff --exit-code -- 'outputs/*.csv'`. A later `python src/download.py --force` creates a **new snapshot**: rerun and review maintained prose/chart titles and locks before publishing. Fixed tight-window dates do not slide with new history.
 
 ## Caveats
+
+At the boundary, summed exercise quota in this snapshot moves Feb–Apr 2022 → May–Jul 2022 by Cat A 3,220 → 3,708 (+15.2%) and Cat B 3,325 → 3,168 (−4.7%); Apr R2 → May R1 is A 532 → 612 (+15.0%) and B 560 → 527 (−5.9%). This is a category-asymmetric supply change in the same file, not a control, and it is not removed by B−A. These figures come from the vendored quota column, not a separately verified release annex.
 
 Quota/supply cycles, dealer orders/bidding strategy, model availability, EV incentives/adoption, macro conditions and anticipation are potential confounds. Reclassification may move measured gaps mechanically through basket composition without proving a behavioral response. Aggregate clearing prices lack individual bids, EV power bands, registrations or buyer substitution. Structural validation does not certify every historical cell; the as-is source can revise.
 

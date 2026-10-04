@@ -50,7 +50,7 @@ code{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:.92em}footer{bo
 <img src="img/banner.svg" alt="Did the B–A premium gap move after May 2022? A descriptive before/after read, not a causal estimate.">
 </picture></div>
 <h1>The gap answer depends on the window</h1>
-<p class="lead"><b>Both premium levels rose.</b> The median exercise-level B−A gap rose from <b>S$6,190.50 to S$18,198.50</b> in the structural comparison (<b>+S$12,008</b>). In the fixed ±12-month comparison it rose from <b>S$21,745.50 to S$24,081.50</b> (<b>+S$2,336</b>): the gap was already large before May 2022.</p>
+<p class="lead"><b>Both premium levels rose.</b> The median exercise-level B−A gap rose from <b>S$6,190.50 to S$18,198.50</b> in the structural comparison (<b>+S$12,008</b>). In the fixed ±12-month comparison it rose from <b>S$21,745.50 to S$24,081.50</b> (<b>+S$2,336</b>): the gap was already large in the year before May 2022.</p>
 <p class="note"><b>Not the effect of the rule change.</b> Redefining A/B changed the baskets being compared. These are different observational samples, with no fixed-composition or untreated control. The small tight-window change does not establish that the rule had no effect.</p>
 <div class="stats">
 <div class="stat"><div class="n">+S$12,008</div><div class="l">Structural median B−A change: 6,190.50 → 18,198.50. Pre 2018-01–2022-04: n=98; post 2022-05–2026-09 R2: n=106 exercises.</div></div>
@@ -62,11 +62,13 @@ code{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:.92em}footer{bo
 <source media="(prefers-color-scheme: dark)" srcset="img/f1_levels-dark.png">
 <img src="img/f1_levels.png" alt="Category A and B premiums rose; the May 2022 eligibility boundary is marked, not interpreted as causal.">
 </picture><figcaption>Levels and the gap answer different questions. Premium means auction quota premium, not renewal PQP or vehicle transaction price. R1/R2 are spaced at month-start/+14 days for display, not actual closing dates.</figcaption></figure>
-<h2>The gap was already large before May 2022</h2>
+<p class="note">Do not subtract the level columns to obtain the median paired gap. median(B)−median(A) moves structural 3,386 → 18,948.50 (+15,562.50) but tight 25,441.50 → 22,028.50 (−3,413), the opposite sign from the median paired-gap change (+12,008 structural; +2,336 tight). For the gap finding, quote the median of exercise-level B−A only.</p>
+<h2>Already wide in the year before May 2022; narrower in 2026</h2>
 <figure class="fig"><picture>
 <source media="(prefers-color-scheme: dark)" srcset="img/f2_gap-dark.png">
 <img src="img/f2_gap.png" alt="B−A gaps with full three-exercise medians; the fixed tight comparison windows are shaded.">
 </picture><figcaption>Shading marks the tight comparison windows, not confidence intervals or treatment effects. The structural read uses the whole 2018-onward chart on either side. Observed ranges overlap substantially; post gaps are not uniformly above pre gaps.</figcaption></figure>
+<p>Calendar-year median paired gaps (S$), not a permanent post level: 2018 1,991; 2019 8,863.50; 2020 2,852.50; 2021 11,799; 2022 25,890.50 (May split); 2023 23,796.50; 2024 11,900.50; 2025 18,492.50; 2026 2,750 (Jan–Sep R2, 18 exercises). 2022 is not a post-only year. The 2026 partial-year median is below the structural-pre median.</p>
 <h2>Method — separate levels from paired differences</h2>
 <ol class="method">
 <li><b>Acquire and verify</b> — independently downloaded LTA <a href="https://data.gov.sg/datasets/d_69b3380ad7e51aff3a7dcc84eba52b8a/view">COE bidding results</a>, pulled 2026-10-04. The vendored raw CSV has a byte-SHA-256 manifest. <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/src/download.py">Download code</a> validates before replacing raw/manifest.</li>
@@ -80,9 +82,11 @@ code{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:.92em}footer{bo
 <h2>What this file cannot say</h2>
 <p><a href="https://onemotoring.lta.gov.sg/content/dam/onemotoring/pdf/Circulars%20to%20ESAs/2022/VRL_04_2022.pdf">LTA circular VRL/04/2022, pp 1, 4–5</a> raises fully electric Cat A maximum power from 97 to 110kW inclusive at the first May 2022 exercise (4–6 May), not the March announcement. Non-fully-electric A retains ≤1,600cc AND ≤97kW. This changes composition in a shared scarce-permit market; B is not an untreated control.</p>
 <p>B−A cancels only exactly shared additive changes, not category-specific quota, demand or mix shifts. Quota/supply cycles, dealer orders, EV incentives/adoption, model availability, macro conditions and anticipation can confound the comparison. Reclassification may mechanically move measured gaps without a behavioral response. Range overlap cannot prove zero effect. Aggregate clearing prices lack individual bids, power bands, registrations and buyer substitution.</p>
+<p>At the boundary, summed exercise quota in this snapshot moves Feb–Apr 2022 → May–Jul 2022 by Cat A 3,220 → 3,708 (+15.2%) and Cat B 3,325 → 3,168 (−4.7%); Apr R2 → May R1 is A 532 → 612 (+15.0%) and B 560 → 527 (−5.9%). This is a category-asymmetric supply change in the same file, not a control, and it is not removed by B−A. These figures come from the vendored quota column, not a separately verified release annex.</p>
 <p>No causal estimates, difference-in-differences, significance stars, prescriptions or forecasts. The <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/if_i_ran_the_test.md">experiment-design annex</a> discusses counterfactuals and shared-market interference; it is not an implemented experiment with this dataset.</p>
 <h2>Reproduce</h2>
 <p>The repository README carries the full rules, validation and limits. Git Bash / Bash, Windows or Linux:</p>
+<p>Requires uv on PATH (https://docs.astral.sh/uv/) to create the Python 3.12 venv. If uv is absent, use <code>python3.12 -m venv .venv</code> (<code>py -3.12 -m venv .venv</code> on Windows), activate as below, then use the same pip line. CI uses actions/setup-python and does not run the uv line.</p>
 <pre><code>git clone https://github.com/faizsaifulnizam/coe-category-break &amp;&amp; cd coe-category-break
 uv venv .venv --python 3.12 --seed
 if [ -f .venv/Scripts/activate ]; then source .venv/Scripts/activate; else source .venv/bin/activate; fi
@@ -94,10 +98,11 @@ python src/figures.py
 python -m unittest discover -s tests -v
 python tests/smoke_test.py</code></pre>
 <p class="cap">Default download validates the committed snapshot without data-fetch network. Installing dependencies needs network/cache. A later <code>--force</code> pull requires rerunning all stages and reviewing maintained prose, chart titles and snapshot locks. Spot-check all-round gap medians: structural 6,190.50 → 18,198.50; tight 21,745.50 → 24,081.50; <code>git diff --exit-code -- 'outputs/*.csv'</code>.</p>
+<p class="cap">Figure PNG bytes are not a cross-machine lock. A dirty reports/figures or docs/img after figures.py is compression/metadata-only only if the decoded pixels also match the committed PNGs. An empty CSV diff alone does not establish image equivalence; inspect any pixel differences.</p>
 <h2>Read more</h2>
 <ul>
 <li><a href="https://github.com/faizsaifulnizam/coe-category-break">Repository and inline method</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/tree/main/outputs">numerical outputs</a></li>
-<li><a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/decision_memo.md">Decision memo</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/data_audit.md">data audit</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/verification.md">verification receipts and clean-history context</a></li>
+<li><a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/decision_memo.md">Decision memo</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/data_audit.md">data audit</a> · <a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/verification.md">public verification receipts</a></li>
 <li><a href="https://github.com/faizsaifulnizam/coe-category-break/blob/main/docs/if_i_ran_the_test.md">If I ran the test — experiment-design annex</a></li>
 </ul>
 <footer>
