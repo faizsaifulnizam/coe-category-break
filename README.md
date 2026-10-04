@@ -141,6 +141,6 @@ Code: [MIT](LICENSE). Data: © Land Transport Authority via data.gov.sg, [Singap
 
 ---
 
-*Singapore public-data series: [hdb-resale-mart](https://github.com/faizsaifulnizam/hdb-resale-mart) · [card-book-quality](https://github.com/faizsaifulnizam/card-book-quality) · [coe-quota-premium](https://github.com/faizsaifulnizam/coe-quota-premium) · [retail-sales-split](https://github.com/faizsaifulnizam/retail-sales-split) · [coe-category-break](https://github.com/faizsaifulnizam/coe-category-break) · [hdb-lease-slope](https://github.com/faizsaifulnizam/hdb-lease-slope).*
+*Six-on-SG: six Singapore-data analyses plus one AI workflow — seven repos: [hdb-resale-mart](https://github.com/faizsaifulnizam/hdb-resale-mart) · [card-book-quality](https://github.com/faizsaifulnizam/card-book-quality) · [coe-quota-premium](https://github.com/faizsaifulnizam/coe-quota-premium) · [retail-sales-split](https://github.com/faizsaifulnizam/retail-sales-split) · [coe-category-break](https://github.com/faizsaifulnizam/coe-category-break) · [hdb-lease-slope](https://github.com/faizsaifulnizam/hdb-lease-slope) · [ai-analyst-workflow](https://github.com/faizsaifulnizam/ai-analyst-workflow) (the AI-workflow add).*
 
 *If you found this useful, a star helps others find it.*
