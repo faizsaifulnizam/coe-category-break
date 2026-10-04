@@ -1,0 +1,7 @@
+*.csv text eol=lf
+*.py text eol=lf
+*.sql text eol=lf
+*.md text eol=lf
+*.svg text eol=lf
+data/raw/coe-bidding-results.csv -text
+data/raw/pull_manifest.json -text

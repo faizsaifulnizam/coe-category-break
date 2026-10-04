@@ -1,0 +1,29 @@
+{
+  "dataset": {
+    "id": "d_69b3380ad7e51aff3a7dcc84eba52b8a",
+    "url": "https://data.gov.sg/datasets/d_69b3380ad7e51aff3a7dcc84eba52b8a/view"
+  },
+  "retrieved_at": "2026-10-04T00:04:11+00:00",
+  "source": "LTA via data.gov.sg public v1 initiate/poll signed download",
+  "files": {
+    "coe-bidding-results.csv": {
+      "bytes": 78695,
+      "sha256": "361d5ae2ba641be1e834ca822e4cb66a91f42b6f7663847f42fcc4a4062b4bac",
+      "rows": 1980,
+      "month_min": "2010-01",
+      "month_max": "2026-09",
+      "latest_round": 2,
+      "published_exercises": 396,
+      "complete_auction_exercises": 396,
+      "suspended_exercises": 6,
+      "suspension_rows": 0,
+      "categories": [
+        "Category A",
+        "Category B",
+        "Category C",
+        "Category D",
+        "Category E"
+      ]
+    }
+  }
+}

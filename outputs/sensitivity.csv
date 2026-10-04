@@ -1,0 +1,7 @@
+window,variant,n_pre,n_post,pre_median_gap,post_median_gap,change_median_gap,change_median_a,change_median_b
+structural,all,98,106,6190.5,18198.5,12008.0,59484.0,75046.5
+structural,exclude_transition,96,104,6050.5,17943.0,11892.5,59868.0,75380.5
+structural,round1,49,53,6000.0,18398.0,12398.0,59967.0,74992.0
+tight,all,24,24,21745.5,24081.5,2336.0,32791.0,29378.0
+tight,exclude_transition,22,22,21249.0,24081.5,2832.5,35390.5,35075.5
+tight,round1,12,12,21650.0,24442.5,2792.5,32141.0,32312.5

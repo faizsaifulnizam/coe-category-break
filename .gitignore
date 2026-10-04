@@ -1,0 +1,30 @@
+# ---- small licensed raw snapshot vendored for offline reproducibility ----
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/README.md
+!data/raw/coe-bidding-results.csv
+!data/raw/pull_manifest.json
+!**/.gitkeep
+models/*
+*.parquet
+*.xlsx
+*.pkl
+*.joblib
+
+# CSVs are ignored by default; published small outputs are exempted
+*.csv
+!outputs/**/*.csv
+!data/raw/coe-bidding-results.csv
+
+# ---- python and notebooks ----
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# ---- env and editor ----
+.env
+.DS_Store
+Thumbs.db

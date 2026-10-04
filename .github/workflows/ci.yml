@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version-file: .python-version
+          cache: pip
+      - name: Install hash-locked dependencies
+        run: python -m pip install --require-hashes -r requirements.lock
+      - name: Full pipeline from vendored official snapshot (offline data)
+        run: |
+          python src/download.py
+          python src/build_dataset.py
+          python src/analysis.py
+          python src/figures.py
+      - name: Real boundary regressions and two-render hashes
+        run: python -m unittest discover -s tests -v
+      - name: Committed artifact and headline locks
+        run: python tests/smoke_test.py
+      - name: Regenerated CSVs match committed bytes
+        run: git diff --exit-code -- 'outputs/*.csv'
