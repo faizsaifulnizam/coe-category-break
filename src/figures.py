@@ -91,7 +91,7 @@ def main():
         for gap in (False,True):
             fig,ax=plt.subplots(figsize=(8,4.5),dpi=200)
             fig.subplots_adjust(left=.105,right=.96,bottom=.23,top=.77)
-            title=fig.text(.04,.945,'Already wide in the year before May 2022;\n2026 median gap is about S$2,750' if gap else 'Both categories rose; the gap followed its own path',fontsize=13,ha='left',va='top',fontfamily='Source Serif 4',color=ink)
+            title=fig.text(.04,.945,'Already wide in the year before May 2022;\n2026 Jan–Sep median gap is S$2,750' if gap else 'Both categories rose; the gap followed its own path',fontsize=13,ha='left',va='top',fontfamily='Source Serif 4',color=ink)
             subtitle=fig.text(.04,.80 if gap else .84,f"2018–{rows[-1][0].year} · EV Cat A limit → 110kW: May 2022 R1 · descriptive, not causal",fontsize=9,color=muted)
             ax.axvline(date(2022,5,1),color=ink,ls=':',lw=1.2)
             if gap:
