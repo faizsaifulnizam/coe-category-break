@@ -35,9 +35,13 @@ Reconciliation (exclusive reasons): **1,980 = 960 pre-2018 + 612 C/D/E in 2018+ 
 
 [Full summary](../outputs/gap_summary.csv) also contains both robustness variants and round counts. Gap is paired B−A per exercise; its median need not equal median B minus median A. Negative gaps are retained, not labelled erroneous. Min/max are not confidence intervals.
 
+Calendar-year median paired gaps (S$), not a permanent post level: 2018 1,991; 2019 8,863.50; 2020 2,852.50; 2021 11,799; 2022 25,890.50 (May split); 2023 23,796.50; 2024 11,900.50; 2025 18,492.50; 2026 2,750 (Jan–Sep R2, 18 exercises). 2022 is not a post-only year. The 2026 partial-year median is below the structural-pre median.
+
 ## Boundary and coverage decisions
 
 Verified before analysis: [LTA circular 8 March 2022, VRL/04/2022, pp 1, 4–5](https://onemotoring.lta.gov.sg/content/dam/onemotoring/pdf/Circulars%20to%20ESAs/2022/VRL_04_2022.pdf), and [May–July quota release](https://www.lta.gov.sg/content/ltagov/en/newsroom/2022/4/news-releases/certificate-of-entitlement-quota-for-may-2022-to-july-2022.html): eligibility begins **May 2022 first exercise, 4–6 May**. Fully electric A threshold **≤110kW**, formerly 97kW; non-fully-electric A remains ≤1,600cc AND ≤97kW. Newly eligible EVs are not an invariant basket; anticipation can begin at March announcement.
+
+At the boundary, summed exercise quota in this snapshot moves Feb–Apr 2022 → May–Jul 2022 by Cat A 3,220 → 3,708 (+15.2%) and Cat B 3,325 → 3,168 (−4.7%); Apr R2 → May R1 is A 532 → 612 (+15.0%) and B 560 → 527 (−5.9%). This is a category-asymmetric supply change in the same file, not a control, and it is not removed by B−A. These figures come from the vendored quota column, not a separately verified release annex.
 
 Suspension source: [LTA, 18 June 2020](https://www.lta.gov.sg/content/ltagov/en/newsroom/2020/6/news-releases/resumption-of-coe-bidding-exercises-from-6-july.html). Bidding resumes from 6 July and accumulated quota returns over July 2020–June 2021: additional reason the structural pre sample spans different supply regimes.
 

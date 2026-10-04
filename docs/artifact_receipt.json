@@ -1,12 +1,7 @@
 {
-  "ref": "feat/category-break",
-  "receipt_kind": "historical_private_prepublication",
-  "history_note": "Prior private build clone; head/ref are archived outside current clean public history, not current-root execution.",
-  "head": "b3a19b69ce787c81828d1d34b25039e720dade55",
-  "clone": "C:\\Users\\Faiz\\AppData\\Local\\hermes\\cache\\scratch\\coe05-receipts\\branch-stranger-gitbash\\coe-category-break",
-  "log": "C:\\Users\\Faiz\\AppData\\Local\\hermes\\cache\\scratch\\coe05-receipts\\branch-stranger-gitbash.log",
-  "readme_setup_and_pipeline_exit": 0,
-  "tests": "15 OK + smoke PASS",
+  "receipt_kind": "current_committed_artifact_hashes",
+  "checked_on": "2026-10-04",
+  "environment": "Windows / Python 3.12; PNG byte hashes are environment-specific",
   "artifact_count": 9,
   "artifact_sha256": {
     "assets/banner-dark.svg": "24ef283b22582ce92d21b99c267969fa5a1936c2b058530ec35db666bd07aa37",
@@ -16,10 +11,7 @@
     "outputs/sensitivity.csv": "1bfdb954b5ea058a83a02d656390b1ca6aa8a2e41eab46ba671b974800b769fe",
     "reports/figures/f1_levels-dark.png": "20232878072f29d23ae8d651ec5bc35df3faf8f89a591ed6ae96e8c2518891dd",
     "reports/figures/f1_levels.png": "1be83a9d40f0f0a214975860dd37bc9249fe0c74ccc16611a9448165d8986bcf",
-    "reports/figures/f2_gap-dark.png": "08b1f90abb63f1d327c1005e145a7b25cbec63f3b5eed6feb0c4517228fa231c",
-    "reports/figures/f2_gap.png": "eb21f42688363adb6936aa9409fec973cc606da281331d5ce32d48a7ef84bf0d"
-  },
-  "relative_targets_checked": 25,
-  "broken_relative_targets": [],
-  "git_status": ""
+    "reports/figures/f2_gap-dark.png": "f65dbda897864e326c29fc99631fc34abacc395b444be2b1e23f21342aae773c",
+    "reports/figures/f2_gap.png": "beb1b70f58d4566385154ada756a6406569fee45595ca27f5679488f09d38060"
+  }
 }
