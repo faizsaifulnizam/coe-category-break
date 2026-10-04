@@ -2,6 +2,14 @@
 
 **2026-10-04 · reviewed; publication approved.** Site/card preparation and checks below are local. Merge, public visibility, Pages deployment and manual social-preview upload are separate operations; this receipt does not claim they have happened.
 
+## Parent final candidate replay — 2026-10-04
+
+A genuinely fresh remote clone at publication-layer head `97625bece488bc3238337aa7fd807f6a076ee940` executed the README's own environment creation, pinned dependency installation and every Python command. 17 focused tests and smoke; 9 protected CSV/PNG/SVG artifacts passed. Every tracked file retained its pre-run SHA-256 and `git status --porcelain` was empty. Figure/banner copies under `docs/img/` match their producer outputs byte-for-byte. Both 1280×640 preview cards were checked.
+
+All reachable Git objects were scanned against the actual non-noreply identity values from the preserved private history: zero matches. Candidate commit authors and committers use the required portfolio noreply identity. Private markers are discovered across the archived history, excluding portfolio and GitHub service noreply identities.
+
+Durable operator receipts: `D:/Data Portfolio/work/wave3/evidence/publication-final/`. These are local evidence locations, not runnable project inputs. The following status/receipt edits change Markdown only; the executed producers and reviewed artifact bytes remain unchanged. Final merge-SHA CI, anonymous access and deployed-blob comparisons are separate coordinator gates, not inferred from this local replay.
+
 ## Clean-history context
 
 This repository starts at clean noreply root **27b6a6711b4a8e4c5cc54d8b37e44a8237148cb1**. Its initial tree preserves the reviewed private-build artifacts. Prior implementation, independent reviews and PR/CI history are archived privately outside this clean repository's history, not presented as current public PRs or CI runs. Both author and committer of the clean root use the GitHub noreply identity.

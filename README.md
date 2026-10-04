@@ -15,7 +15,7 @@
 
 > **Both premium levels rose, but the gap answer depends on the window.** The median exercise-level **B−A gap rose from S$6,190.50 to S$18,198.50** in the structural comparison (**+S$12,008**). In the fixed ±12-month comparison it rose only **S$2,336**, from **S$21,745.50 to S$24,081.50**: the gap was already large before May 2022. These describe different samples, **not the effect of the rule change**, and do not establish that the rule had no effect.
 
-**Status:** built and reviewed 2026-10-04; publication approved. Fixed official snapshot through **2026-09 R2**, independently pulled 2026-10-04. Findings/chart titles are reviewed prose, not automatically refreshed text. Part of a six-repo series on Singapore public data. [Report site](https://faizsaifulnizam.github.io/coe-category-break/) (available after deployment) · [verification receipts](docs/verification.md). Prior private reviews are archived outside this repository's clean public history.
+**Status:** built and reviewed 2026-10-04; publication approved. Fixed official snapshot through **2026-09 R2**, independently pulled 2026-10-04. Findings/chart titles are reviewed prose, not automatically refreshed text. Part of a six-repo series on Singapore public data. [Report site](https://faizsaifulnizam.github.io/coe-category-break/) · [verification receipts](docs/verification.md). Prior private reviews are archived outside this repository's clean public history.
 
 ## Key numbers (all reproducible)
 
