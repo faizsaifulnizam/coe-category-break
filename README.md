@@ -17,6 +17,8 @@
 
 **Status:** built and reviewed 2026-10-04; public. Grok-review corrections verified 2026-10-04. Fixed official snapshot through **2026-09 R2**, independently pulled 2026-10-04. Findings/chart titles are reviewed prose, not automatically refreshed text. Part of a six-repo series on Singapore public data. [Report site](https://faizsaifulnizam.github.io/coe-category-break/) · [verification receipts](docs/verification.md). Prior private reviews are archived outside this repository's clean public history.
 
+**Intended use:** For a policy analyst, this brief supports communicating the paired premium gap with both comparison windows and sensitivity checks. It does not assess rule effectiveness, as the categories changed composition and the comparison cannot identify a policy effect.
+
 ## Key numbers (all reproducible)
 
 One observation = one fully paired exercise; money is **S$**, not vehicle prices or renewal PQP. All-round rows from [gap_summary.csv](outputs/gap_summary.csv):
