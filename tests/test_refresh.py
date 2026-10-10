@@ -18,6 +18,86 @@ class Refresh(unittest.TestCase):
         with patch.object(download, 'RAW', raw), patch.object(sys, 'argv', ['download.py', '--force']), patch.object(download, 'get', side_effect=responses):
             download.main()
 
+    def test_unicode_numeric_refresh_preserves_snapshot(self):
+        rows = list(csv.reader(io.StringIO((download.RAW / download.FILE).read_text())))
+        previous = {name: (download.RAW / name).read_bytes()
+                    for name in (download.FILE, 'pull_manifest.json')}
+        for column in range(3, 7):
+            for token in ('１２３４５', '１２,３４５', '١٢٣٤٥'):
+                with self.subTest(column=download.HEADER[column], token=token), tempfile.TemporaryDirectory() as td:
+                    changed = [row[:] for row in rows]
+                    changed[1][column] = token
+                    out = io.StringIO()
+                    csv.writer(out, lineterminator='\n').writerows(changed)
+                    raw = Path(td)
+                    for name, value in previous.items():
+                        (raw / name).write_bytes(value)
+                    with self.assertRaisesRegex(ValueError, 'invalid integer cell'):
+                        self.run_refresh(out.getvalue().encode(), raw)
+                    self.assertEqual(previous, {name: (raw / name).read_bytes() for name in previous})
+                    self.assertEqual(set(previous), {p.name for p in raw.iterdir()})
+
+    def test_unicode_year_refresh_preserves_snapshot(self):
+        rows = list(csv.reader(io.StringIO((download.RAW / download.FILE).read_text())))
+        # Mutate one earliest-row year: original code fails pairing before its
+        # unsafe calendar loop, so RED needs no platform-specific memory cap.
+        rows[1][0] = '２０１０-01'
+        out = io.StringIO()
+        csv.writer(out, lineterminator='\n').writerows(rows)
+        previous = {name: (download.RAW / name).read_bytes()
+                    for name in (download.FILE, 'pull_manifest.json')}
+        with tempfile.TemporaryDirectory() as td:
+            raw = Path(td)
+            for name, value in previous.items():
+                (raw / name).write_bytes(value)
+            with self.assertRaisesRegex(ValueError, 'invalid month/round/category'):
+                self.run_refresh(out.getvalue().encode(), raw)
+            self.assertEqual(previous, {name: (raw / name).read_bytes() for name in previous})
+            self.assertEqual(set(previous), {p.name for p in raw.iterdir()})
+
+    def test_latest_unicode_year_refresh_preserves_snapshot(self):
+        rows = list(csv.reader(io.StringIO((download.RAW / download.FILE).read_text())))
+        latest = max((r[0], r[1]) for r in rows[1:])
+        for row in rows[1:]:
+            if tuple(row[:2]) == latest:
+                row[0] = ''.join(chr(ord(c) + 0xFEE0) if '0' <= c <= '9' else c for c in row[0][:4]) + row[0][4:]
+        out = io.StringIO()
+        csv.writer(out, lineterminator='\n').writerows(rows)
+        previous = {name: (download.RAW / name).read_bytes()
+                    for name in (download.FILE, 'pull_manifest.json')}
+        with tempfile.TemporaryDirectory() as td:
+            raw = Path(td)
+            for name, value in previous.items():
+                (raw / name).write_bytes(value)
+            with self.assertRaisesRegex(ValueError, 'invalid month/round/category'):
+                self.run_refresh(out.getvalue().encode(), raw)
+            self.assertEqual(previous, {name: (raw / name).read_bytes() for name in previous})
+            self.assertEqual(set(previous), {p.name for p in raw.iterdir()})
+
+    def test_ascii_numeric_refresh_reaches_sql_unchanged(self):
+        from src.build_dataset import connect
+        rows = list(csv.reader(io.StringIO((download.RAW / download.FILE).read_text())))
+        for column in range(3, 7):
+            for token in ('12345', '12,345'):
+                with self.subTest(column=download.HEADER[column], token=token), tempfile.TemporaryDirectory() as td:
+                    changed = [row[:] for row in rows]
+                    changed[1][column] = token
+                    out = io.StringIO()
+                    csv.writer(out, lineterminator='\n').writerows(changed)
+                    data = out.getvalue().encode()
+                    raw = Path(td)
+                    self.run_refresh(data, raw)
+                    self.assertEqual(data, (raw / download.FILE).read_bytes())
+                    manifest = json.loads((raw / 'pull_manifest.json').read_text())
+                    self.assertEqual(download.validate(data), manifest['files'][download.FILE])
+                    con = connect(raw_path=raw / download.FILE)
+                    try:
+                        value = con.execute(f'SELECT {download.HEADER[column]} FROM staged WHERE month = ? AND round_no = ? AND category = ?',
+                                            [rows[1][0] + '-01', int(rows[1][1]), rows[1][2]]).fetchone()[0]
+                        self.assertEqual(12345, value)
+                    finally:
+                        con.close()
+
     def test_unterminated_quote_preserves_snapshot(self):
         data = (download.RAW / download.FILE).read_bytes()
         # Quote only the final numeric cell, deliberately omitting its closing quote.
