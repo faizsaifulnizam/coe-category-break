@@ -31,9 +31,9 @@ def validate(data):
         if len(r) != 7:
             raise ValueError('wrong field count')
         month, rnd, cat = r[:3]
-        if not re.fullmatch(r'\d{4}-(0[1-9]|1[0-2])', month) or rnd not in {'1','2'} or cat not in CATEGORIES:
+        if not re.fullmatch(r'[0-9]{4}-(0[1-9]|1[0-2])', month) or rnd not in {'1','2'} or cat not in CATEGORIES:
             raise ValueError('invalid month/round/category')
-        if any(not re.fullmatch(r'(\d+|\d{1,3}(,\d{3})+)', x) for x in r[3:]):
+        if any(not re.fullmatch(r'([0-9]+|[0-9]{1,3}(,[0-9]{3})+)', x) for x in r[3:]):
             raise ValueError('invalid integer cell')
         vals = [int(x.replace(',','')) for x in r[3:]]
         if any(v > 2**63 - 1 for v in vals):
